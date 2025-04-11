@@ -43,5 +43,6 @@ void add_task() {
     scanf("%s", &task);
     printf(GREEN "Task '%s' added successfully!\n\n", task);
 
+    //recall choice to keep the process going 
     select_choice(choice);
 }
