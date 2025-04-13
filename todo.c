@@ -2,9 +2,11 @@
 #include "color.h"
 #include <string.h>
 
+//prototyping functions
 void select_choice();
 void react_to_choice(int choice);
 void add_task();
+void view_tasks();
 // defining file
 FILE *todoFile = NULL;
 
@@ -39,6 +41,10 @@ void react_to_choice(int choice)
         //recall choice to keep the process going
         select_choice(choice);
         break;
+    case 2:
+        view_tasks();
+        select_choice(choice);
+        break;
     default:
         printf(RED "Invalid choice. Please try again.\n");
         select_choice(choice);
@@ -66,4 +72,12 @@ void add_task()
 
     // Print success message
     printf(GREEN "Task '%s' added successfully!\n\n", task);
+}
+
+void view_tasks(){
+    char task[100];
+    todoFile = fopen("todo.txt", "r");
+    while (fgets(task, sizeof(task), todoFile)) {
+        printf(RED "%s", task);
+    }
 }
