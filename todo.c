@@ -7,6 +7,7 @@ void select_choice();
 void react_to_choice(int choice);
 void add_task();
 void view_tasks();
+void delete_task();
 // defining file
 FILE *todoFile = NULL;
 
@@ -45,6 +46,10 @@ void react_to_choice(int choice)
         view_tasks();
         select_choice(choice);
         break;
+    case 4:
+        delete_task();
+        select_choice(choice);
+        break;
     default:
         printf(RED "Invalid choice. Please try again.\n");
         select_choice(choice);
@@ -76,8 +81,51 @@ void add_task()
 
 void view_tasks(){
     char task[100];
+    int count = 1;
     todoFile = fopen("todo.txt", "r");
     while (fgets(task, sizeof(task), todoFile)) {
-        printf(RED "%s", task);
+        printf(RED "%d. %s", count, task);
+        count++;
     }
+    fclose(todoFile);
+}
+
+void delete_task() {
+    int task_number;
+    char task[100];
+    int lines = 0;
+    FILE *todoFile2 = NULL;
+
+    printf(YELLOW "Enter the task number to delete: ");
+    scanf("%d", &task_number);
+
+    // Open the file in read mode and get amount of lines
+    todoFile = fopen("todo.txt", "r");
+    while (fgets(task, sizeof(task), todoFile)) {
+        lines++;
+    }
+    fclose(todoFile);
+
+    //open file
+    todoFile = fopen("todotempt.txt", "w");
+    todoFile2 = fopen("todo.txt", "r");
+    int current_line = 1;
+    while (fgets(task, sizeof(task), todoFile2)) {
+        if (current_line != task_number) {
+            fputs(task, todoFile);
+        }
+        current_line++;
+    }
+
+    fclose(todoFile2);
+    fclose(todoFile);
+    remove("todo.txt");
+    rename("todotempt.txt", "todo.txt");
+
+    size_t len = strlen(task);
+    if (len > 0 && task[len - 1] == '\n') {
+        task[len - 1] = '\0';
+    }
+    
+    printf(GREEN "Task '%s' deleted successfully!\n\n", task);
 }
