@@ -39,7 +39,6 @@ void react_to_choice(int choice)
     {
     case 1:
         add_task();
-        //recall choice to keep the process going
         select_choice(choice);
         break;
     case 2:
@@ -84,7 +83,7 @@ void view_tasks(){
     int count = 1;
     todoFile = fopen("todo.txt", "r");
     while (fgets(task, sizeof(task), todoFile)) {
-        printf(RED "%d. %s", count, task);
+        printf(RED "%d. %s [NOT COMPLETED]", count, task);
         count++;
     }
     fclose(todoFile);
@@ -106,7 +105,7 @@ void delete_task() {
     }
     fclose(todoFile);
 
-    //open file
+    //open 2 files, one for reading and one for writing, if the line is not the one to be deleted, write it to the new file, clone the files afterwards 
     todoFile = fopen("todotempt.txt", "w");
     todoFile2 = fopen("todo.txt", "r");
     int current_line = 1;
@@ -119,13 +118,15 @@ void delete_task() {
 
     fclose(todoFile2);
     fclose(todoFile);
+    //swapping
     remove("todo.txt");
     rename("todotempt.txt", "todo.txt");
 
+    //clear random buffer
     size_t len = strlen(task);
     if (len > 0 && task[len - 1] == '\n') {
         task[len - 1] = '\0';
     }
-    
+
     printf(GREEN "Task '%s' deleted successfully!\n\n", task);
 }
