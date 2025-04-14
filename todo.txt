@@ -1,15 +1,8 @@
-thisi s a test
-this should priont 3 lines
-hello
-test
-test2
-test3
-
-
-    todoFile = fopen("todo.txt", "r");
-    while (fgets(task, sizeof(task), todoFile)) {
-        lines++;
-    }
-hi
-asdasd
-asdawsd
+hello [DONE]
+test 1 [NOT COMPLETED]
+asdihasdkjsh [NOT COMPLETED]
+est 1 million [NOT COMPLETED]
+haii [DONE]
+what is up [DONE]
+bnlehhh  [NOT COMPLETED]
+asdasd [NOT COMPLETED]
