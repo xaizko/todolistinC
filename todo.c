@@ -55,6 +55,9 @@ void react_to_choice(int choice)
         delete_task();
         select_choice(choice);
         break;
+    case 5:
+        printf(GREEN "Goodbye!\n");
+        break;
     default:
         printf(RED "Invalid choice. Please try again.\n");
         select_choice(choice);
