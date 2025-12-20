@@ -41,26 +41,26 @@ void react_to_choice(int choice)
     case 1:
         add_task();
         //recall choice to keep the process going
-        select_choice(choice);
+        select_choice();
         break;
     case 2:
         view_tasks();
-        select_choice(choice);
+        select_choice();
         break;
     case 3:
         modify_task();
-        select_choice(choice);
+        select_choice();
         break;  
     case 4:
         delete_task();
-        select_choice(choice);
+        select_choice();
         break;
     case 5:
         printf(GREEN "Goodbye!\n");
-        break;
+	break;
     default:
         printf(RED "Invalid choice. Please try again.\n");
-        select_choice(choice);
+        select_choice();
         break;
     }
 }
